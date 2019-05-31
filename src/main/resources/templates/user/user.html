@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8"/>
+        <title th:text="用户信息">User</title>
+        <script src="../../static/js/jquery-3.3.1.js" th:src="@{/js/jquery-3.3.1.js}"></script>
+        <script src="../../static/js/test.js" th:src="@{/js/test.js}"></script>
+    </head>
+
+    <body>
+        <ul>
+            <li th:each="user:${userList}">
+                <span th:text="${user.id}"></span>
+                <span th:text="${user.name}"></span>
+                <span th:text="${user.password}"></span>
+            </li>
+        </ul>
+
+        <button th:text="登录" id="login"></button>
+    </body>
+</html>

@@ -19,13 +19,13 @@ layui.use('layer',function(){
         var username = $(" input[ name='username' ] ").val();
         var password = $(" input[ name='password' ] ").val();
         $.ajax({
-            url:"login",
+            url:"/login",
             data:{"username":username,"password":password},
             type:"post",
             dataType:"json",
             success:function(data){
-                if(data.success){
-                    window.location = "index";
+                if(data.code=='200'){
+                    window.location = "/test.html";
                 }else{
                     layer.msg(data.msg);
                 }

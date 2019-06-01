@@ -36,7 +36,7 @@ spring:
       # 配置一个连接在池中最小生存的时间，单位是毫秒
       minEvictableIdleTimeMillis: 300000
       # 配置一个连接在池中最大生存的时间，单位是毫秒
-      maxEvictableIdleTimeMillis: 900000
+      maxEvictableIdleTimeMillis: 9000000
       # 配置检测连接是否有效
       validationQuery: SELECT 1 FROM DUAL
   jpa:

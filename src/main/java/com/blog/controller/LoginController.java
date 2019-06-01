@@ -1,12 +1,21 @@
 package com.blog.controller;
 
+import com.blog.entrty.UserInfo;
+import com.blog.enums.LoginEnum;
+import com.blog.exceptions.BlogException;
 import com.blog.utils.HttpUtil;
+import com.blog.utils.ResponseResultVoUtil;
+import com.blog.vo.ResponseResultVO;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -24,6 +33,46 @@ public class LoginController {
     public ModelAndView login(ModelAndView modelAndView, HttpServletRequest request){
         LOG.info("------------IP【{}】，访问登录页主界面--------------", HttpUtil.getIpAddress(request));
         modelAndView.setViewName("/login/login");
+        return modelAndView;
+    }
+
+    /**
+     * 真正的登陆逻辑
+     * @param username
+     * @param password
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("login")
+    public ResponseResultVO<UserInfo> login(String username, String password){
+        //获取主体对象
+        Subject subject = SecurityUtils.getSubject();
+        //封装用户对象
+        UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(username,password);
+        //执行登陆方法
+        try {
+            //执行认证方法  用户登陆
+            subject.login(usernamePasswordToken);
+            UserInfo user =  subject.getPrincipals().oneByType(UserInfo.class);
+            if(user.getState()==0){
+                throw new BlogException();
+            }
+        }catch (UnknownAccountException unkAccount){
+            //用户账户错误
+            return ResponseResultVoUtil.failure(LoginEnum.NOSUCHUSER.getCode(), LoginEnum.NOSUCHUSER.getMsg());
+        }catch (IncorrectCredentialsException incPassword){
+            //密码错误
+            return ResponseResultVoUtil.failure(LoginEnum.WRONGPASSWORD.getCode(), LoginEnum.WRONGPASSWORD.getMsg());
+        }catch (BlogException blogException){
+            //用户被冻结
+            return ResponseResultVoUtil.failure(LoginEnum.USERISFROZEN.getCode(), LoginEnum.USERISFROZEN.getMsg());
+        }
+        return ResponseResultVoUtil.success();
+    }
+
+    @RequestMapping("test.html")
+    public ModelAndView test(ModelAndView modelAndView){
+        modelAndView.setViewName("/login/test");
         return modelAndView;
     }
 }

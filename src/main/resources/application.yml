@@ -44,3 +44,8 @@ spring:
     hibernate:
       ddl-auto: update
 
+user:
+  password:
+    error:
+      count: 4
+

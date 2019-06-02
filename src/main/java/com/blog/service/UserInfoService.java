@@ -13,4 +13,10 @@ public interface UserInfoService {
      * @return
      */
     UserInfo findByUsername(String username);
+
+    /**
+     * 修改用户
+     * @param userInfo
+     */
+    void updateUserInfo(UserInfo userInfo);
 }

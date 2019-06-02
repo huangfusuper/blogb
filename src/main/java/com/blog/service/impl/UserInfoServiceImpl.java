@@ -21,4 +21,10 @@ public class UserInfoServiceImpl implements UserInfoService {
         logger.info("--------------------开始查询用户【{}】----------------------",username);
         return userInfoDao.findByUsername(username);
     }
+
+    @Override
+    public void updateUserInfo(UserInfo userInfo) {
+        logger.info("--------------开始修改用户------------------------");
+        userInfoDao.save(userInfo);
+    }
 }

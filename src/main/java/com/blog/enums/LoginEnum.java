@@ -10,9 +10,9 @@ public enum LoginEnum {
     /**
      * 没有此用户
      */
-    NOSUCHUSER("101","用户账户错误"),
-    WRONGPASSWORD("102","用户密码错误"),
-    USERISFROZEN("103","用户被冻结，请联系管理员！")
+    NOSUCHUSER("101","用户账户错误！"),
+    WRONGPASSWORD("102","用户密码错误！"),
+    USERISFROZEN("103","用户被冻结，请联系管理员！"),
     ;
     /**
      * 错误码

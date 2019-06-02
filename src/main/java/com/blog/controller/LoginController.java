@@ -3,6 +3,7 @@ package com.blog.controller;
 import com.blog.entrty.UserInfo;
 import com.blog.enums.LoginEnum;
 import com.blog.exceptions.BlogException;
+import com.blog.service.UserInfoService;
 import com.blog.utils.HttpUtil;
 import com.blog.utils.ResponseResultVoUtil;
 import com.blog.vo.ResponseResultVO;
@@ -13,6 +14,8 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -20,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.time.Instant;
 import java.util.Map;
 
 /**
@@ -28,6 +32,13 @@ import java.util.Map;
  */
 @RestController
 public class LoginController {
+    /**
+     * 密码错误次数
+     */
+    @Value("${user.password.error.count}")
+    private Integer passwordErrorCount=3;
+    @Autowired
+    private UserInfoService userInfoService;
     private static final Logger LOG = LoggerFactory.getLogger(LoginController.class);
     @GetMapping("login.html")
     public ModelAndView login(ModelAndView modelAndView, HttpServletRequest request){
@@ -49,24 +60,34 @@ public class LoginController {
         Subject subject = SecurityUtils.getSubject();
         //封装用户对象
         UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(username,password);
+        UserInfo user = userInfoService.findByUsername(username);
         //执行登陆方法
         try {
-            //执行认证方法  用户登陆
-            subject.login(usernamePasswordToken);
-            UserInfo user =  subject.getPrincipals().oneByType(UserInfo.class);
+            if(user.getPasswordErrorCount()>passwordErrorCount){
+                user.setState((byte) 0);
+                userInfoService.updateUserInfo(user);
+                throw new BlogException();
+            }
             if(user.getState()==0){
                 throw new BlogException();
             }
+            //执行认证方法  用户登陆
+            subject.login(usernamePasswordToken);
         }catch (UnknownAccountException unkAccount){
             //用户账户错误
             return ResponseResultVoUtil.failure(LoginEnum.NOSUCHUSER.getCode(), LoginEnum.NOSUCHUSER.getMsg());
         }catch (IncorrectCredentialsException incPassword){
             //密码错误
-            return ResponseResultVoUtil.failure(LoginEnum.WRONGPASSWORD.getCode(), LoginEnum.WRONGPASSWORD.getMsg());
+            user.setPasswordErrorCount(user.getPasswordErrorCount()+1);
+            userInfoService.updateUserInfo(user);
+            return ResponseResultVoUtil.failure(LoginEnum.WRONGPASSWORD.getCode(), LoginEnum.WRONGPASSWORD.getMsg()+"错误次数为："+user.getPasswordErrorCount()+"次");
         }catch (BlogException blogException){
             //用户被冻结
-            return ResponseResultVoUtil.failure(LoginEnum.USERISFROZEN.getCode(), LoginEnum.USERISFROZEN.getMsg());
+            return ResponseResultVoUtil.failure(LoginEnum.USERISFROZEN.getCode(),LoginEnum.USERISFROZEN.getMsg());
         }
+        //密码正确 设置为0
+        user.setPasswordErrorCount(0);
+        userInfoService.updateUserInfo(user);
         return ResponseResultVoUtil.success();
     }
 

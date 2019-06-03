@@ -44,6 +44,9 @@ spring:
     hibernate:
       ddl-auto: update
 
+mybatis:
+  mapper-locations: classpath:mapper/*DaoMapper.xml
+
 user:
   password:
     error:

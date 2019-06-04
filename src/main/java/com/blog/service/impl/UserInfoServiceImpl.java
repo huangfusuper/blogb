@@ -1,6 +1,6 @@
 package com.blog.service.impl;
 
-import com.blog.entrty.UserInfo;
+import com.blog.dataobject.UserInfo;
 import com.blog.mapper.UserInfoDao;
 import com.blog.service.UserInfoService;
 import org.slf4j.Logger;

@@ -39,13 +39,11 @@ spring:
       maxEvictableIdleTimeMillis: 9000000
       # 配置检测连接是否有效
       validationQuery: SELECT 1 FROM DUAL
-  jpa:
-    show-sql: true
-    hibernate:
-      ddl-auto: update
+
 
 mybatis:
-  mapper-locations: classpath:mapper/*DaoMapper.xml
+  mapper-locations: classpath:mapper/*.xml
+
 
 user:
   password:

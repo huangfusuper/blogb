@@ -1,18 +1,18 @@
-package com.blog.mapper;
+package com.blog.service;
 
 import com.blog.dataobject.SysRole;
 
 import java.util.List;
 
 /**
- * 角色服务
  * @author huangfu
+ * 角色服务
  */
-public interface RoleDao {
+public interface RoleService {
     /**
      * 根据用户id查询用户所属权限
-     * @param id
+     * @param userId
      * @return
      */
-    List<SysRole> findUserInfoRole(Integer id);
+    List<SysRole> findUserInfoRole(Integer userId);
 }

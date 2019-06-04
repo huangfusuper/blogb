@@ -1,6 +1,7 @@
 package com.blog.controller;
 
-import com.blog.entrty.UserInfo;
+import com.alibaba.fastjson.JSON;
+import com.blog.dataobject.UserInfo;
 import com.blog.enums.LoginEnum;
 import com.blog.exceptions.BlogException;
 import com.blog.service.UserInfoService;
@@ -91,10 +92,18 @@ public class LoginController {
         userInfoService.updateUserInfo(user);
         return ResponseResultVoUtil.success();
     }
-    @RequiresPermissions("user:add")
     @RequestMapping("test.html")
     public ModelAndView test(ModelAndView modelAndView){
         modelAndView.setViewName("/login/test");
         return modelAndView;
+    }
+
+
+    @RequiresPermissions("test:add")
+    @ResponseBody
+    @RequestMapping("test")
+    public ResponseResultVO test(){
+        LOG.info("------------------------------------------------------------------------------------------------");
+        return ResponseResultVoUtil.success("人间不值得");
     }
 }

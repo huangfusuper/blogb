@@ -1,6 +1,6 @@
 package com.blog.service;
 
-import com.blog.entrty.UserInfo;
+import com.blog.dataobject.UserInfo;
 
 /**
  * 用户服务

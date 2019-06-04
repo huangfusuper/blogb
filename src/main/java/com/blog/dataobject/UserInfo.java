@@ -1,23 +1,15 @@
-package com.blog.entrty;
+package com.blog.dataobject;
 
 import lombok.Data;
-import org.hibernate.annotations.DynamicUpdate;
 
-import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
 /**
  * @author 皇甫
  */
 @Data
-@Entity
-@DynamicUpdate
 public class UserInfo {
-    @Id
-    @GeneratedValue
     private Integer uid;
-    @Column(unique =true)
     /**
      * 帐号
      */
@@ -69,14 +61,11 @@ public class UserInfo {
     /**
      * 用户状态,0:创建未认证（比如没有激活，没有输入验证码等等）--等待验证的用户 , 1:正常状态,2：用户被锁定.
      */
-    private byte state;
+    private Byte state;
     /**
      * 立即从数据库中进行加载数据;
      * 一个用户具有多个角色
      */
-    @ManyToMany(fetch= FetchType.EAGER)
-    @JoinTable(name = "SysUserRole", joinColumns = { @JoinColumn(name = "uid") }, inverseJoinColumns ={@JoinColumn(name = "roleId") })
-    private List<SysRole> roleList;
 
     /**
      * 设置最后登录时间
@@ -102,7 +91,7 @@ public class UserInfo {
     public UserInfo() {
     }
 
-    public UserInfo(String username, String password, String name, String email, String phone, String mobile, String idCard, String salt, Integer passwordErrorCount, byte state, List<SysRole> roleList) {
+    public UserInfo(String username, String password, String name, String email, String phone, String mobile, String idCard, String salt, Integer passwordErrorCount, Byte state) {
         this.username = username;
         this.password = password;
         this.name = name;
@@ -113,7 +102,6 @@ public class UserInfo {
         this.salt = salt;
         this.passwordErrorCount = passwordErrorCount;
         this.state = state;
-        this.roleList = roleList;
     }
 
 }

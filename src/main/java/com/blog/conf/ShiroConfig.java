@@ -29,11 +29,13 @@ public class ShiroConfig {
         //设置安全管理器
         shiroFilterFactoryBean.setSecurityManager(securityManager);
         shiroFilterFactoryBean.setLoginUrl("/login.html");
+        shiroFilterFactoryBean.setUnauthorizedUrl("/login.html");
         Map<String,String> map = new LinkedHashMap<>(15);
+        map.put("/jquery/**", "anon");
         map.put("/js/**", "anon");
-        map.put("/login.html", "anon");
-        map.put("/login", "anon");
-        map.put("/**", "authc");
+        map.put("/layui/**", "anon");
+        map.put("/login/**", "anon");
+        map.put("/**", "user");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(map);
         return shiroFilterFactoryBean;
     }

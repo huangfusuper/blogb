@@ -1,18 +1,17 @@
-package com.blog.entrty;
+package com.blog.dataobject;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 /**
  * @author 皇甫
  */
 @Data
-@Entity
 public class SysPermission {
-    @Id
-    @GeneratedValue
     /**
      * 主键.
      */
@@ -21,7 +20,6 @@ public class SysPermission {
      * 名称.
      */
     private String name;
-    @Column(columnDefinition="enum('menu','button')")
     /**
      * 资源类型，[menu|button]
      */
@@ -39,28 +37,42 @@ public class SysPermission {
      */
     private Long parentId;
     /**
-     * 父编号列表
+     * 是否可用
      */
-    private String parentIds;
-    private Boolean available = Boolean.FALSE;
+    private Integer available;
     /**
-     * 自动生成表数据 驼峰命名法
+     * 创建时间
      */
-    @ManyToMany
-    @JoinTable(name="SysRolePermission",joinColumns={@JoinColumn(name="permissionId")},inverseJoinColumns={@JoinColumn(name="roleId")})
-    private List<SysRole> roles;
+    private Date createTime;
+
+    /**
+     * 修改时间
+     */
+    private Date updateTime;
+
+    /**
+     * 创建人
+     */
+    private String createBy;
+
+    /**
+     * 修改人
+     */
+    private String updateBy;
 
     public SysPermission() {
     }
 
-    public SysPermission(String name, String resourceType, String url, String permission, Long parentId, String parentIds, Boolean available, List<SysRole> roles) {
+    public SysPermission(String name, String resourceType, String url, String permission, Long parentId, Integer available, Date createTime, Date updateTime, String createBy, String updateBy) {
         this.name = name;
         this.resourceType = resourceType;
         this.url = url;
         this.permission = permission;
         this.parentId = parentId;
-        this.parentIds = parentIds;
         this.available = available;
-        this.roles = roles;
+        this.createTime = createTime;
+        this.updateTime = updateTime;
+        this.createBy = createBy;
+        this.updateBy = updateBy;
     }
 }

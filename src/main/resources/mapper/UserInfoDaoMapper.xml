@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.blog.mapper.UserInfoDao">
+
+    <select id="findByUsername" resultType="com.blog.dataobject.UserInfo">
+        select
+          uid,
+          username,
+          password,
+          email,
+          phone,
+          mobile,
+          id_card as idCard,
+          salt,
+          registration_time as registrationTime,
+          update_date as updateDate,
+          landing_time as landingTime,
+          password_error_count as passwordErrorCount,
+          state
+        from user_info where username= #{username}
+    </select>
+
+    <update id="save" parameterType="com.blog.dataobject.UserInfo">
+        update user_info
+        <trim prefix="set"  suffixOverrides=",">
+            <if test="username !=null and username != ''">
+                username = #{username},
+            </if>
+            <if test="password !=null and password != ''">
+                password = #{password},
+            </if>
+            <if test="email !=null and email != ''">
+                email = #{email},
+            </if>
+            <if test="phone !=null and phone != ''">
+                phone = #{phone},
+            </if>
+            <if test="mobile !=null and mobile != ''">
+                mobile = #{mobile},
+            </if>
+            <if test="idCard !=null and idCard != ''">
+                id_card = #{idCard},
+            </if>
+            <if test="salt !=null and salt != ''">
+                salt = #{salt},
+            </if>
+            <if test="registrationTime !=null">
+                registration_time = #{registrationTime},
+            </if>
+            <if test="updateDate !=null">
+                update_date = #{updateDate},
+            </if>
+            <if test="landingTime !=null">
+                landing_time = #{landingTime},
+            </if>
+            <if test="passwordErrorCount !=null">
+                password_error_count = #{passwordErrorCount},
+            </if>
+            <if test="state !=null">
+                state = #{state},
+            </if>
+        </trim>
+        where uid = #{uid}
+    </update>
+
+    <insert id="insertUserInfo" parameterType="com.blog.dataobject.UserInfo">
+        insert into user_info
+          <trim prefix="(" suffix=")" suffixOverrides=",">
+              <if test="uid!=null and uid != ''">
+                  uid,
+              </if>
+              <if test="username !=null and username != ''">
+                  username,
+              </if>
+              <if test="password !=null and password != ''">
+                  password,
+              </if>
+              <if test="email !=null and email != ''">
+                  email,
+              </if>
+              <if test="phone !=null and phone != ''">
+                  phone,
+              </if>
+              <if test="mobile !=null and mobile != ''">
+                  mobile,
+              </if>
+              <if test="idCard !=null and idCard != ''">
+                  id_card,
+              </if>
+              <if test="salt !=null and salt != ''">
+                  salt,
+              </if>
+              <if test="registrationTime !=null">
+                  registration_time,
+              </if>
+              <if test="updateDate !=null">
+                  update_date,
+              </if>
+              <if test="landingTime !=null">
+                  landing_time,
+              </if>
+              <if test="passwordErrorCount !=null">
+                  password_error_count,
+              </if>
+              <if test="state !=null">
+                  state,
+              </if>
+          </trim>
+
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="uid!=null and uid != ''">
+                #{uid},
+            </if>
+            <if test="username !=null and username != ''">
+                #{username},
+            </if>
+            <if test="password !=null and password != ''">
+                #{password},
+            </if>
+            <if test="email !=null and email != ''">
+                #{email},
+            </if>
+            <if test="phone !=null and phone != ''">
+                #{phone},
+            </if>
+            <if test="mobile !=null and mobile != ''">
+                #{mobile},
+            </if>
+            <if test="idCard !=null and idCard != ''">
+                #{idCard},
+            </if>
+            <if test="salt !=null and salt != ''">
+                #{salt},
+            </if>
+            <if test="registrationTime !=null">
+                #{registrationTime},
+            </if>
+            <if test="updateDate !=null">
+                #{updateDate},
+            </if>
+            <if test="landingTime !=null">
+                #{landingTime},
+            </if>
+            <if test="passwordErrorCount !=null">
+                #{passwordErrorCount},
+            </if>
+            <if test="state !=null">
+                #{state},
+            </if>
+        </trim>
+    </insert>
+</mapper>

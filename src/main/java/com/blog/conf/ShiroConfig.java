@@ -33,9 +33,20 @@ public class ShiroConfig {
         Map<String,String> map = new LinkedHashMap<>(15);
         map.put("/jquery/**", "anon");
         map.put("/js/**", "anon");
+
         map.put("/layui/**", "anon");
+        map.put("/layui/css/**", "anon");
+        map.put("/layui/font/**", "anon");
+        map.put("/layui/images/**", "anon");
+        map.put("/layui/lay/**", "anon");
+
         map.put("/login/**", "anon");
-        map.put("/**", "user");
+        map.put("/login/css/**", "anon");
+        map.put("/login/img/**", "anon");
+        map.put("/login/js/**", "anon");
+        map.put("/*.html", "anon");
+        //map.put("/**", "authc");
+        map.put("/**", "perms");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(map);
         return shiroFilterFactoryBean;
     }

@@ -42,6 +42,9 @@ public class UserInfoRealm extends AuthorizingRealm {
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
         LOGGER.info("----------------开始鉴权---------------------");
         UserInfo userInfo = (UserInfo) principals.getPrimaryPrincipal();
+        if(userInfo == null){
+            return null;
+        }
         SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
         List<SysRole> userInfoRole = roleService.findUserInfoRole(userInfo.getUid());
         //获取用户所具有的的所由角色id

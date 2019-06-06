@@ -1,18 +1,34 @@
 package com.blog.exceptions;
 
+import com.blog.enums.superenum.IEnum;
+import com.blog.exceptions.superexception.IException;
+
 /**
  * @author 皇甫
  */
-public class BlogException extends RuntimeException {
-    private String code;
-    private String msg;
+public class BlogException extends RuntimeException implements IException {
+    private IEnum iEnum;
 
-    public BlogException(String code, String msg) {
+    public <E extends IEnum> BlogException(E e){
+        super(e.getMsg());
+        this.iEnum = e;
+    }
+
+    public BlogException(String msg,Throwable cause) {
+        super(msg,cause);
+    }
+    public BlogException(Throwable cause) {
+        super(cause);
+    }
+    public BlogException(String msg) {
         super(msg);
-        this.code = code;
+    }
+
+    @Override
+    public IEnum getIEnumClass() {
+        return iEnum;
     }
 
     public BlogException() {
-        super();
     }
 }

@@ -1,12 +1,13 @@
 package com.blog.enums;
 
+import com.blog.enums.superenum.IEnum;
 import lombok.Data;
 
 /**
  * @author 皇甫
  */
 
-public enum LoginEnum {
+public enum LoginEnum implements IEnum {
     /**
      * 没有此用户
      */
@@ -28,6 +29,7 @@ public enum LoginEnum {
         this.msg = msg;
     }
 
+    @Override
     public String getCode() {
         return code;
     }
@@ -36,6 +38,7 @@ public enum LoginEnum {
         this.code = code;
     }
 
+    @Override
     public String getMsg() {
         return msg;
     }

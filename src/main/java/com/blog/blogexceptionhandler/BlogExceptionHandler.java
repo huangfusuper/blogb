@@ -46,7 +46,6 @@ public class BlogExceptionHandler {
             responseMessage(responseResult,e);
             return responseResult;
         }
-
         return null;
     }
     private void responseMessage(ResponseResultVO<Object> responseResult,Exception ex) {

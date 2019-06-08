@@ -20,7 +20,7 @@ public class RoleServiceImpl implements RoleService {
     @Autowired
     private RoleDao roleDao;
     @Override
-    public List<SysRole> findUserInfoRole(Integer userId) {
+    public List<SysRole> findUserInfoRole(String userId) {
         LOGGER.info("-----------------开始查询用户id为【{}】,对应角色--------------------",userId);
         List<SysRole> userInfoRole = roleDao.findUserInfoRole(userId);
         LOGGER.info("-----------------查询成功，该用户对应角色数量为【{}】--------------------",userInfoRole.size());

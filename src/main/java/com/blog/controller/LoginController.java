@@ -42,7 +42,7 @@ public class LoginController {
     @Autowired
     private UserInfoService userInfoService;
     private static final Logger LOG = LoggerFactory.getLogger(LoginController.class);
-    @GetMapping("login.html")
+    @GetMapping("/login.html")
     public ModelAndView login(ModelAndView modelAndView, HttpServletRequest request){
         LOG.info("------------IP【{}】，访问登录页主界面--------------", HttpUtil.getIpAddress(request));
         modelAndView.setViewName("/login/login");
@@ -56,7 +56,7 @@ public class LoginController {
      * @return
      */
     @ResponseBody
-    @RequestMapping("login")
+    @RequestMapping("/login")
     public ResponseResultVO<UserInfo> login(String username, String password){
         //获取主体对象
         Subject subject = SecurityUtils.getSubject();
@@ -101,9 +101,9 @@ public class LoginController {
 
     @RequiresPermissions("test:add")
     @ResponseBody
-    @RequestMapping("test")
+    @RequestMapping("/test")
     public ResponseResultVO test(){
-        LOG.info("------------------------------------------------------------------------------------------------");
+        LOG.info("---------------------------------------------------");
         return ResponseResultVoUtil.success("人间不值得");
     }
 }

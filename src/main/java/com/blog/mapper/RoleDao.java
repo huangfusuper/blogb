@@ -14,5 +14,5 @@ public interface RoleDao {
      * @param id
      * @return
      */
-    List<SysRole> findUserInfoRole(Integer id);
+    List<SysRole> findUserInfoRole(String id);
 }

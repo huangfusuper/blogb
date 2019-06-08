@@ -9,7 +9,7 @@ import java.util.Date;
  */
 @Data
 public class UserInfo {
-    private Integer uid;
+    private String uid;
     /**
      * 帐号
      */

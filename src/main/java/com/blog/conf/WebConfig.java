@@ -27,6 +27,9 @@ public class WebConfig implements WebMvcConfigurer {
         InterceptorRegistration addInterceptor = registry.addInterceptor(securityInterceptor);
         addInterceptor.excludePathPatterns("/error.html");
         addInterceptor.excludePathPatterns("/login*");
+        addInterceptor.excludePathPatterns("/jquery/**");
+        addInterceptor.excludePathPatterns("/layui/**");
+        addInterceptor.excludePathPatterns("/login/**");
         addInterceptor.addPathPatterns("/**");
 
     }

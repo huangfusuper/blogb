@@ -14,5 +14,5 @@ public interface RoleService {
      * @param userId
      * @return
      */
-    List<SysRole> findUserInfoRole(Integer userId);
+    List<SysRole> findUserInfoRole(String userId);
 }

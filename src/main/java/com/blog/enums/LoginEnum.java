@@ -14,6 +14,7 @@ public enum LoginEnum implements IEnum {
     NOSUCHUSER("101","用户账户错误！"),
     WRONGPASSWORD("102","用户密码错误！"),
     USERISFROZEN("103","用户被冻结，请联系管理员！"),
+    TEST("1111111111","活动结束！"),
     ;
     /**
      * 错误码

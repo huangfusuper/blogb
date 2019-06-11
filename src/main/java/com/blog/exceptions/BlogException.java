@@ -31,4 +31,5 @@ public class BlogException extends RuntimeException implements IException {
 
     public BlogException() {
     }
+
 }

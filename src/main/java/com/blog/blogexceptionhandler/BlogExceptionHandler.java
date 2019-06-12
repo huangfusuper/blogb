@@ -37,6 +37,7 @@ public class BlogExceptionHandler {
     @ExceptionHandler(value = Exception.class)
     @ResponseBody
     public Object errorHandler( HttpServletRequest request, Exception e) throws Exception {
+        e.printStackTrace();
         ResponseResultVO<Object> responseResult = new ResponseResultVO<Object>();
         if(e instanceof UnauthenticatedException){
             return ResponseResultVoUtil.failure("BLOG565620","权限认证失败");
@@ -46,7 +47,9 @@ public class BlogExceptionHandler {
             responseMessage(responseResult,e);
             return responseResult;
         }
-        return null;
+        responseResult.setMsg("未知异常");
+        responseResult.setCode("500000000");
+        return responseResult;
     }
     private void responseMessage(ResponseResultVO<Object> responseResult,Exception ex) {
          IException iException= (IException)ex;

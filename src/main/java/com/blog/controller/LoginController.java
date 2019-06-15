@@ -92,6 +92,18 @@ public class LoginController {
         userInfoService.updateUserInfo(user);
         return ResponseResultVoUtil.success();
     }
+
+    @RequestMapping("main.html")
+    public ModelAndView main(ModelAndView modelAndView){
+        modelAndView.setViewName("/main/main");
+        return modelAndView;
+    }
+    @RequestMapping("menu.html")
+    public ModelAndView menu(ModelAndView modelAndView){
+        modelAndView.setViewName("/main/menu");
+        return modelAndView;
+    }
+
     @RequestMapping("test.html")
     public ModelAndView test(ModelAndView modelAndView){
         modelAndView.setViewName("/login/test");

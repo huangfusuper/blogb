@@ -25,7 +25,7 @@ layui.use('layer',function(){
             dataType:"json",
             success:function(data){
                 if(data.code=='200'){
-                    window.location = "/test.html";
+                    window.location = "/main.html";
                 }else{
                     layer.msg(data.msg);
                 }

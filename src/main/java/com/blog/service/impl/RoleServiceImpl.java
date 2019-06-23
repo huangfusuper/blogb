@@ -26,4 +26,9 @@ public class RoleServiceImpl implements RoleService {
         LOGGER.info("-----------------查询成功，该用户对应角色数量为【{}】--------------------",userInfoRole.size());
         return userInfoRole;
     }
+
+    @Override
+    public void printTest(String name) {
+        LOGGER.info("----------------开始执行定时任务【{}】---------------------",name);
+    }
 }

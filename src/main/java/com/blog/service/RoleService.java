@@ -15,4 +15,10 @@ public interface RoleService {
      * @return
      */
     List<SysRole> findUserInfoRole(String userId);
+
+    /**
+     * 测试打印
+     * @param name
+     */
+    void printTest(String name);
 }

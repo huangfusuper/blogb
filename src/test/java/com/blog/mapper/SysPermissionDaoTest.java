@@ -2,6 +2,7 @@ package com.blog.mapper;
 
 import com.blog.BlogApplication;
 import com.blog.dataobject.SysPermission;
+import com.blog.test.TestLogAop;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,6 +24,9 @@ public class SysPermissionDaoTest {
     private SysPermissionDao sysPermissionDao;
     @Autowired
     private RedisTemplate redisTemplate;
+
+    @Autowired
+    private TestLogAop testLogAop;
 
     @Test
     public void test(){
@@ -46,5 +50,10 @@ public class SysPermissionDaoTest {
         ValueOperations valueOperations = redisTemplate.opsForValue();
         redisTemplate.delete("123");
         System.out.println(redisTemplate.opsForValue().get("123"));
+    }
+
+    @Test
+    public void setTestLogAop(){
+        testLogAop.test();
     }
 }

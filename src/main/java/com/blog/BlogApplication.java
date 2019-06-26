@@ -1,14 +1,10 @@
 package com.blog;
 
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.shiro.crypto.hash.SimpleHash;
-import org.apache.shiro.util.ByteSource;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
-
-import java.util.UUID;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 /**
  * 项目启动类
@@ -17,6 +13,7 @@ import java.util.UUID;
 @SpringBootApplication
 @MapperScan("com.blog.mapper")
 @EnableAspectJAutoProxy
+@EnableScheduling
 public class BlogApplication {
     public static void main(String[] args) {
         SpringApplication.run(BlogApplication.class);

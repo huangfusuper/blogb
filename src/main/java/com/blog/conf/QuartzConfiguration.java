@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 /**
  * @author 皇甫
  */
-@Configuration
+//@Configuration
 public class QuartzConfiguration {
     /**
      * 任务详情描述
